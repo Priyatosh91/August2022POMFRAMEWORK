@@ -9,6 +9,7 @@ public class NewAcccountPage {
 		int z1 =10;
 		int z2 =20;
 		System.out.println(z1+z2);
+
 		
 	}
 
