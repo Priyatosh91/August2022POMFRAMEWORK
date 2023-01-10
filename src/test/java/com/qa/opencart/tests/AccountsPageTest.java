@@ -88,7 +88,7 @@ public class AccountsPageTest extends BaseTest {
 		};
 	}
 
-	@Test(dataProvider = "getSearckKey")
+	@Test(dataProvider = "getSearckKey", priority = 7)
 	public void doSearchTest(String searchKey) {
 
 		Assert.assertTrue(accPage.doSearch(searchKey).getSearchResultsCount() > 0);
@@ -105,7 +105,7 @@ public class AccountsPageTest extends BaseTest {
 		};
 	}
 
-	@Test(dataProvider = "getProductName")
+	@Test(dataProvider = "getProductName", priority = 8)
 	public void selectProductTest(String searchKey, String productName) {
 
 		String productHeader = accPage.doSearch(searchKey).selectProduct(productName).getProductHeaderName();
@@ -123,7 +123,7 @@ public class AccountsPageTest extends BaseTest {
 				{ "iMac", "iMac" }, { "Samsung", "Samsung Galaxy Tab 10.1" }, { "iphone", "iPhone" } };
 	}
 
-	@Test(dataProvider = "getProductDetail")
+	@Test(dataProvider = "getProductDetail", priority = 9)
 	public void getProductDetailsTest(String searchKey, String productName) {
 
 		Map<String, String> productDetail = accPage.doSearch(searchKey).selectProduct(productName).getProductDetails();
@@ -145,7 +145,7 @@ public class AccountsPageTest extends BaseTest {
 
 	}
 
-	@Test(dataProvider = "getProductDescriptions")
+	@Test(dataProvider = "getProductDescriptions", priority = 10)
 	public void getProductDescriptionTest(String searchKey, String productName) {
 
 		String text = accPage.doSearch(searchKey).selectProduct(productName).getProductInfoPageText();
@@ -175,7 +175,7 @@ public class AccountsPageTest extends BaseTest {
 
 	}
 
-	@Test
+	@Test(priority =11)
 	public void addToCartTest() {
 
 		productInfoPage = accPage.doSearch("Macbook").selectProduct("MacBook Air");
