@@ -35,6 +35,7 @@ public class DriverFactory {
 		// mvn clean install -Denv="qa" -Dbrowser="chrome"
 
 		 String browserName = System.getProperty("browser");
+		 
 		 System.out.println("Browser name is : " + browserName);
 
 		// System.out.println("Browser passed from command line: " + browser);
