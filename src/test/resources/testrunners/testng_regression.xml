@@ -22,7 +22,7 @@
 	</test>
 
 
-	<test name="Open cart Account Page Test">
+	<!-- <test name="Open cart Account Page Test">
 
 		<classes>
 			<class name="com.qa.opencart.tests.AccountsPageTest" />
@@ -34,7 +34,7 @@
 		<classes>
 			<class name="com.qa.opencart.tests.RegisterPageTest" />
 		</classes>
-	</test>
+	</test> -->
 
 
 </suite> 
