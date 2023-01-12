@@ -28,15 +28,15 @@ public class DriverFactory {
 
 	public WebDriver init_driver(Properties prop) {
 
-	//	String browserName = prop.getProperty("browser").trim();
+		String browserName = prop.getProperty("browser").trim();
 
-	//	System.out.println("Browser name is : " + browserName);
+		System.out.println("Browser name is : " + browserName);
 
 		// mvn clean install -Denv="qa" -Dbrowser="chrome"
 
-		 String browserName = System.getProperty("browser");
+	//	 String browserName = System.getProperty("browser");
 		 
-		 System.out.println("Browser name is : " + browserName);
+	//	 System.out.println("Browser name is : " + browserName);
 
 		// System.out.println("Browser passed from command line: " + browser);
 
