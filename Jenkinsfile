@@ -1,92 +1,79 @@
-pipeline{
-    
+pipeline 
+{
     agent any
     
-    stages{
-        
-        stage("build"){
-            
-            steps{
-                
-                echo("Build project")
+    tools{
+    	maven 'M3'
+        }
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            post 
+            {
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
         
-        stage("Run UT's"){
-            
+        
+        stage("Deploy to QA"){
             steps{
-                
-                echo("Run unit test cases")
+                echo("deploy to qa")
             }
         }
-            
-        stage("Run SIT's"){
-            
-            steps{
                 
-                echo("Run Integration test cases")
-            }    
-            
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/Priyatosh91/August2022POMFRAMEWORK.git'
+                    sh "mvn clean install -Dbrowser=${browserName}"
+                    
+                }
+            }
         }
-        
-        stage("deploy dev"){
-            
-            steps{
                 
-                echo("deploy to dev")
-            }    
-            
-        }
-        
-        stage("deploy on QA"){
-            
-            steps{
-                
-                echo("deploy on qa")
-            }    
-            
-        }
-        
-        stage("run sanity test"){
-            
-            steps{
-                
-                echo("run sanity test")
-            }    
-            
-        }
-        
-         stage("deploy on stage"){
-            
-            steps{
-                
-                echo("deploy on stage")
-            }    
-            
-        }
-        
-        stage("run on stage"){
-            
-            steps{
-                
-                echo("run on stage")
-            }    
-            
-        }
-        
-        stage("deploy on prod"){
-            
-            steps{
-                
-                echo("deploy on prod")
-            }    
-            
+     
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
+            }
         }
         
         
+        stage('Publish Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: false, 
+                                  reportDir: 'build', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Extent Report', 
+                                  reportTitles: ''])
+            }
+        }
         
-        
+        stage("Deploy to PROD"){
+            steps{
+                echo("deploy to PROD")
+            }
+        }
     }
-    
-    
 }
