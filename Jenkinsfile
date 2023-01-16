@@ -36,7 +36,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/Priyatosh91/August2022POMFRAMEWORK.git'
-                    sh "mvn clean install"
+                    sh "mvn clean install -Denv=${"stage"}"
                     
                 }
             }
