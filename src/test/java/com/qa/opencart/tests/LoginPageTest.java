@@ -27,7 +27,7 @@ public class LoginPageTest extends BaseTest {
 
 		String actTitle = loginPage.getLoginPageTitle();
 
-		System.out.println("Login page title is : " + actTitle);
+		System.out.println("Login Page title is : " + actTitle);
 
 		Assert.assertEquals(actTitle, Constants.LOGIN_PAGE_TITLE);
 
@@ -40,7 +40,7 @@ public class LoginPageTest extends BaseTest {
 
 		String actUrl = loginPage.getLoginPageUrl();
 
-		System.out.println("Login page url is : " + actUrl);
+		System.out.println("Login Page url is : " + actUrl);
 
 		Assert.assertTrue(actUrl.contains(Constants.LOGIN_PAGE_URL_FRACTION));
 
